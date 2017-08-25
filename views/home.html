@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app.home">
+<head>
+	<meta charset="UTF-8">
+	<title>Home</title>
+	<link rel="stylesheet" href="../vendor/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../styles/home.css">
+	<!-- 引入的资料库 -->
+	<script src="../vendor/js/angular.min.js"></script>
+	<script src="../vendor/js/jquery.min.js"></script>
+	<script src="../vendor/js/bootstrap.min.js"></script>
+	<!-- home -->
+	<script src="../scripts/app.home.js"></script>
+	<script src="../scripts/controllers/home.js"></script>
+	<script src="../scripts/services/homeService.js"></script>
+
+	<!-- 引入用户管理模块相关的js文件 -->
+	<script src="../scripts/services/userService.js"></script>
+	<script src="../scripts/controllers/userController.js"></script>
+
+</head>
+<body ng-controller="HomeController">
+
+	<!-- 顶部 -->
+	<div class="container-fluid">
+		<div class="row">
+			<div class="home-title">
+				<div class="col-sm-5 col-sm-offset-1 top">
+					<h2>云计划人人科技后台管理系统</h2>
+				</div>
+				<div class="col-sm-3 col-sm-offset-3 top">you</div>
+			</div>	
+		</div>
+		
+	
+		<!-- 中间部分 -->
+		<div class="row">
+	
+			<!-- 左侧导航菜单 -->
+			<div class="col-sm-2 menu-nav">
+				<div class="home-nav">
+					<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+						<div class="panel panel-default">
+							<div class="panel-heading" role="tab" id="headingOne">
+								<h4 class="panel-title">
+									<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+										员工管理
+									</a>
+								</h4>
+							</div>
+							<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+								<div class="panel-body">
+									<ul>
+										<li><a href="#">薪资管理</a></li>
+										<li><a href="#">绩效管理</a></li>
+										<li><a href="#">住宿管理</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="panel panel-default">
+							<div class="panel-heading" role="tab" id="headingTwo">
+								<h4 class="panel-title">
+									<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+										业务管理
+									</a>
+								</h4>
+							</div>
+							<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+								<div class="panel-body">
+									<ul>
+										<li><a href="#">内部业务</a></li>
+										<li><a href="#">对外业务</a></li>
+										<li><a href="#">其他业务</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="panel panel-default">
+							<div class="panel-heading" role="tab" id="headingThree">
+								<h4 class="panel-title">
+									<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+										通知公告管理
+									</a>
+								</h4>
+							</div>
+							<div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+								<div class="panel-body">
+									<ul>
+										<li><a href="#">企业文化</a></li>
+										<li><a href="#">公交</a></li>
+										<li><a href="#">新闻公告</a></li>
+										<li><a href="#">重大信息</a></li>
+
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+	
+			<!-- 内容区 -->
+			<div class="col-sm-10">
+				<div class="body-title">
+					<span>信息管理：</span>
+					<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">添加</button>
+				</div>
+
+				<!-- 添加的模态框 -->
+				<div id="myModal" class="modal fade bs-example-modal-lg addmodel" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								<h2 class="modal-title" id="gridSystemModalLabel">添加用户</h2>
+							</div>
+							<div class="modal-body">
+								<div class="row addbox">
+									<div>
+										<label class="col-sm-3 col-sm-offset-1" for="username">用户名：</label>
+										<input type="text" class="col-sm-6" id="username" ng-model="addloginname">
+									</div>
+								</div>
+								<div class="row addbox">
+									<div>
+										<label class="col-sm-3 col-sm-offset-1" for="psw">密&nbsp;&nbsp;&nbsp;&nbsp;码：</label>
+										<input type="text" class="col-sm-6" id="psw" ng-model="addpassword">
+									</div>
+								</div>
+								<div class="row addbox">
+									<div>
+										<label class="col-sm-3 col-sm-offset-1" for="username">状态：</label>
+										<input type="text" class="col-sm-6" id="username" ng-model="addstatus">
+									</div>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+								<button type="button" class="btn btn-primary" ng-click="addUser()"  data-toggle="modal" data-target="#myModal">Save</button>
+							</div>
+						</div><!-- /.modal-content -->
+					</div><!-- /.modal-dialog -->
+				</div><!-- /.modal -->
+
+
+				<!-- 修改的模态框 -->
+				<div id="editmessage" class="modal fade bs-example-modal addmodel" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								<h2 class="modal-title" id="gridSystemModalLabel">修改用户信息</h2>
+							</div>
+							<div class="modal-body">
+								<div class="row addbox">
+									<div>
+										<label class="col-sm-3 col-sm-offset-1" for="editusername">用户名：</label>
+										<input type="text" class="col-sm-6" id="editusername" ng-model="loginname">
+									</div>
+								</div>
+								<div class="row addbox">
+									<div>
+										<label class="col-sm-3 col-sm-offset-1" for="editpsw">密&nbsp;&nbsp;&nbsp;&nbsp;码：</label>
+										<input type="text" class="col-sm-6" id="editpsw" ng-model="password">
+									</div>
+								</div>
+								<div class="row addbox">
+									<div>
+										<label class="col-sm-3 col-sm-offset-1" for="editusername">状态：</label>
+										<input type="text" class="col-sm-6" id="editusername" ng-model="status">
+									</div>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+								<button type="button" class="btn btn-primary" ng-click="saveEdit(id,loginname,password,status)"  data-toggle="modal" data-target="#editmessage">Save</button>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+
+
+
+				<!-- 信息表 -->
+				<div>
+					<table class="table table-bordered">
+						<tr>
+							<th>编号</th>
+							<th>用户名</th>
+							<th>密码</th>
+							<th>状态</th>
+							<th>创建时间</th>
+							<th>操作</th>
+						</tr>
+						<tr ng-repeat="user in users track by user.id">
+							<td>{{user.id}}</td>
+							<td>{{user.loginname}}</td>
+							<td>{{user.password}}</td>
+							<td>{{user.status}}</td>
+							<td>{{user.createdate | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+							<td class="operation">
+								<button type="button" class="btn btn-warning" ng-click="editUser(user.id,user.loginname,user.password,user.status)" data-toggle="modal" data-target=".bs-example-modal">修改</button>
+								<button type="button" class="btn btn-danger" ng-click="delUser(user.id)">删除</button>
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div class="flip">
+					<button type="button" class="btn btn-primary" ng-click="handlePage(-1)">上一页</button>
+					<button type="button" class="btn btn-primary" ng-click="handlePage(1)">下一页</button>
+				</div>
+			</div>
+		</div>
+	
+		<!-- 底部部分 -->
+		<div class="row">
+			<div class="bottom">
+				<div class="col-sm-12">
+					底部区域
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
